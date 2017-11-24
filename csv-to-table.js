@@ -1,5 +1,9 @@
 function onButtonClick () {
   const csvData = document.forms.csvform.csvtext.value;
+  
+  var setData = document.forms.csvform.headertext.value;
+  localStorage.setItem('setData', setData);
+  
   var lfArray = csvData.split("\n");
  
   if (document.checkbox.header.checked){
@@ -64,4 +68,9 @@ function onButtonClick () {
     };
    };
  };
+};
+
+window.onload = function () {
+  var　getData = localStorage.getItem('setData');
+  document.getElementById("headertext").value = getData;
 };
