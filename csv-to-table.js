@@ -3,9 +3,13 @@ function onButtonClick () {
   
   var setData = document.forms.csvform.headertext.value;
   localStorage.setItem('setData', setData);
-  
-  var lfArray = csvData.split("\n");
  
+  if (document.getElementById('result') != null) {
+    var element = document.getElementById('result')
+    element.textContent = null;
+  };
+
+  var lfArray = csvData.split("\n");
   if (document.checkbox.header.checked){
   var csvArray = [];
   for (var i = 1; i < lfArray.length; i++ ) {
@@ -36,7 +40,7 @@ function onButtonClick () {
       td.innerText = tdResult;
     };
   };
- }else{
+  }else{
    var headerData = document.forms.csvform.headertext.value;
    var csvArray = [];
    for (var i = 0; i < lfArray.length; i++ ) {
