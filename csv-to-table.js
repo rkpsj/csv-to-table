@@ -2,8 +2,9 @@ function onButtonClick () {
   const csvData = document.forms.csvform.csvtext.value;
   
   var setData = document.forms.csvform.headertext.value;
-  localStorage.setItem('setData', setData);
- 
+  if (setData.length != 0){
+    localStorage.setItem('setData', setData);
+    };
   if (document.getElementById('result') != null) {
     var element = document.getElementById('result')
     element.textContent = null;
