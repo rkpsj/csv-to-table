@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="csv-to-table.js"></script>
+</head>
+<body>
+<h1>CSVデータのテーブル表示</h1>
+<div>
+    <form name="csvform" id="csvform" action="">
+    <textarea name="csvtext" id="csvtext" style="width: 90%; height: 100px;"></textarea>
+    <input type="button" value="表示" onclick="onButtonClick();" />
+    </form>
+</div>
+
+<div>
+    <label>header（カンマ区切り） </label><input><br>
+</div>
+
+<div>
+    <form name="checkbox">
+    <input type="checkbox" name="header">データの1行目をヘッダーにする</input>
+    </form>
+</div>
+
+<div id="d1" style="margin-top: 50px;"></div>
+
+
+<div style="margin-top: 50px;">
+    ※headerのカラム名は編集可能なようにしておく。<br>
+    ※headerのカラム名は、localStrageに履歴を保持してほしい。可能であれば選択して復元してほしい。<br>
+    ※tableはborderや色分けで見やすくする。<br>
+    ※今後グラフ表示の機能を追加してもらう可能性がある。
+</div>
+</body>
+</html>
