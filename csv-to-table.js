@@ -1,66 +1,57 @@
 function onButtonClick () {
   const csvData = document.forms.csvform.csvtext.value;
-  var tempArray = csvData.split("\n");
-  //console.log(tempArray);
+  var lfArray = csvData.split("\n");
+ 
   if (document.checkbox.header.checked){
   var csvArray = [];
-  for (var i = 1; i < tempArray.length; i++ ) {
-    var row = tempArray[i];
-    //console.log(row)
-    var rowArray = row.split(",");
-    csvArray.push(rowArray);
+  for (var i = 1; i < lfArray.length; i++ ) {
+    var row = lfArray[i];
+    var commaArray = row.split(",");
+    csvArray.push(commaArray);
   };
-  //console.log('result',csvArray);
-  
-  
 
   var table = document.createElement('table');
-  //var d = document.getElementById('d1');
-  d1.appendChild(table);
+  result.appendChild(table);
 
-  var headerArray = tempArray[0].split(",");
+  var headerArray = lfArray[0].split(",");
   for (var h = 0; h < headerArray.length; h++ ) {
-    var H = headerArray[h];
+    var thResult = headerArray[h];
     var th = document.createElement('th');
     table.appendChild(th);
-    th.innerText = H;
+    th.innerText = thResult;
   };
 
   for (var j = 0; j < csvArray.length; j++ ) {
-    var J = csvArray[j];
+    var trResult = csvArray[j];
      var tr = document.createElement('tr');
      table.appendChild(tr);
-    for (var k = 0; k < J.length; k++ ) {
-      var K = J[k];
+    for (var k = 0; k < trResult.length; k++ ) {
+      var tdResult = trResult[k];
       var td = document.createElement('td');
       tr.appendChild(td);
-      td.innerText = K;
+      td.innerText = tdResult;
     };
   };
  }else{
    var csvArray = [];
-   for (var i = 0; i < tempArray.length; i++ ) {
-     var row = tempArray[i];
-     //console.log(row)
-     var rowArray = row.split(",");
-     csvArray.push(rowArray);
+   for (var i = 0; i < lfArray.length; i++ ) {
+     var row = lfArray[i];
+     var commaArray = row.split(",");
+     csvArray.push(commaArray);
    };
-  //console.log('result',csvArray);
-
 
    var table = document.createElement('table');
-   //var d = document.getElementById('d1');
-   d1.appendChild(table);
+   result.appendChild(table);
 
    for (var j = 0; j < csvArray.length; j++ ) {
-     var J = csvArray[j];
+     var trResult = csvArray[j];
      var tr = document.createElement('tr')
      table.appendChild(tr);
-    for (var k = 0; k < J.length; k++ ) {
-      var K = J[k];
+    for (var k = 0; k < trResult.length; k++ ) {
+      var tdResult = trResult[k];
       var td = document.createElement('td');
       tr.appendChild(td);
-      td.innerText = K;
+      td.innerText = tdResult;
     };
    };
  };
