@@ -33,6 +33,7 @@ function onButtonClick () {
     };
   };
  }else{
+   var headerData = document.forms.csvform.headertext.value;
    var csvArray = [];
    for (var i = 0; i < lfArray.length; i++ ) {
      var row = lfArray[i];
@@ -42,6 +43,14 @@ function onButtonClick () {
 
    var table = document.createElement('table');
    result.appendChild(table);
+
+   var headerArray = headerData.split(",");
+   for (var h = 0; h < headerArray.length; h++ ) {
+    var thResult = headerArray[h];
+    var th = document.createElement('th');
+    table.appendChild(th);
+    th.innerText = thResult;
+   };
 
    for (var j = 0; j < csvArray.length; j++ ) {
      var trResult = csvArray[j];
