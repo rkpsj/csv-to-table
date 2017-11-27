@@ -4,7 +4,7 @@ function onButtonClick() {
   var csvArray;
   setData();
   if (document.getElementById('result') !== null) {
-    clear();
+    resultClear();
   }
   function createCsvArray() {
     var row = lfArray[i];
@@ -71,7 +71,12 @@ function setData() {
   }
 }
 
-function clear() {
+function resultClear() {
   var element = document.getElementById('result');
   element.textContent = null;
+}
+
+function textareaClear() {
+  var textarea = document.getElementById('csvtext');
+  textarea.value = null;
 }
