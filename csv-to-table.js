@@ -57,17 +57,36 @@ function onButtonClick() {
     createHeader();
     createData();
   }
+  logData();
 }
 
 window.onload = function () {
-  var getData = localStorage.getItem('setData');
-  document.getElementById("headertext").value = getData;
+  var getData = JSON.parse(localStorage.getItem('setData'));
+  if (getData === null) {
+    return;
+  }
+  document.getElementById("headertext").value = getData[0];
+  logData();
 }
 
 function setData() {
-  var setData = document.getElementById('headertext').value;
-  if (setData.length !== 0) {
-    localStorage.setItem('setData', setData);
+  var headerText = document.getElementById('headertext').value;
+  var getData = JSON.parse(localStorage.getItem('setData'));
+  if (headerText === null || headerText === "") {
+    return;
+  }
+  if (getData === null) {
+    var setData = [headerText, null];
+    localStorage.setItem('setData', JSON.stringify(setData));
+    return;
+  }
+  if (getData[0] === headerText) {
+    false;
+  } else {
+    var newData = headerText;
+    var datalist = [newData, getData];
+    localStorage.setItem('setData', JSON.stringify(datalist));
+    return;
   }
 }
 
@@ -79,4 +98,24 @@ function resultClear() {
 function textareaClear() {
   var textarea = document.getElementById('csvtext');
   textarea.value = null;
+}
+
+function logData() {
+  var getData = JSON.parse(localStorage.getItem('setData'));
+  var log1 = document.getElementById('log1')
+  var log2 = document.getElementById('log2')
+  var log3 = document.getElementById('log3')
+  log1.innerText = getData[0];
+  log2.innerText = getData[1][0];
+  log3.innerText = getData[1][1][0];
+}
+
+function log1() {
+  document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[0];
+}
+function log2() {
+  document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[1][0];
+}
+function log3() {
+  document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[1][1][0];
 }
