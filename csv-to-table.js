@@ -1,79 +1,79 @@
-var result = document.getElementById('result');
-var chckbx = document.getElementById('checkbox')
-var csvData = document.getElementById('csvtext').value;
-var lfArray = csvData.split("\n");
+function onButtonClick() {
+  var csvData = document.getElementById('csvtext').value;
+  var lfArray = csvData.split("\n");
+  resultClear();
 
-var table = createTable(table);
-var csvArray = createCsvArray(csvArray);
-var headerArray = createHeaderArray(headerArray);
+  var table = createTable();
+  var csvArray = createCsvArray(lfArray);
+  var headerArray = createHeaderArray(lfArray);
+  createHeader(table, headerArray);
+  createData(table, csvArray);
+}
 
-function createTable(table) {
+function resultClear() {
+  var result = document.getElementById('result');
+  if (result) {
+      result.textContent = null;
+  }
+}
+
+function createTable() {
   var table = document.createElement('table');
+  var result = document.getElementById('result');
   result.appendChild(table);
   return table;
 }
-function createCsvArray(csvArray) {
+
+function createHeaderArray(lfArray) {
+  var chckbx = document.getElementById('checkbox');
   if (chckbx.checked) {
-    for (var i = 1; i < lfArray.length; i++) {
-      var csvArray = [];
-      var row = lfArray[i];
-      var commaArray = row.split(",");
-      csvArray.push(commaArray);
-    }
+      var headerArray = lfArray[0].split(",");
   } else {
-    for (var i = 0; i < lfArray.length; i++) {
-      var csvArray = [];
-      var row = lfArray[i];
-      var commaArray = row.split(",");
-      csvArray.push(commaArray);
-    }
-  } return csvArray;
-}
-function createHeaderArray(headerArray) {
-  if (chckbx.checked) {
-    var headerArray = lfArray[0].split(",");
-  } else {
-    var headerData = document.getElementById('headertext').value;
-    var headerArray = headerData.split(",");
+      var headerData = document.getElementById('headertext').value;
+      var headerArray = headerData.split(",");
   } return headerArray;
 }
-function createHeader() {
+
+function createHeader(table, headerArray) {
   for (var h = 0; h < headerArray.length; h++) {
-    var thResult = headerArray[h];
-    var th = document.createElement('th');
-    table.appendChild(th);
-    th.innerText = thResult;
+      var thResult = headerArray[h];
+      var th = document.createElement('th');
+      table.appendChild(th);
+      th.innerText = thResult;
   }
 }
 
-function createData() {
+function createCsvArray(lfArray) {
+  var chckbx = document.getElementById('checkbox');
+  var csvArray = [];
+  if (chckbx.checked) {
+      for (var i = 1; i < lfArray.length; i++) {
+          var row = lfArray[i];
+          var commaArray = row.split(",");
+          csvArray.push(commaArray);
+      }
+  } else {
+      for (var i = 0; i < lfArray.length; i++) {
+          var row = lfArray[i];
+          var commaArray = row.split(",");
+          csvArray.push(commaArray);
+      }
+  } return csvArray;
+}
+
+function createData(table, csvArray) {
   for (var j = 0; j < csvArray.length; j++) {
-    var trResult = csvArray[j];
-    var tr = document.createElement('tr');
-    table.appendChild(tr);
-    for (var k = 0; k < trResult.length; k++) {
-      var tdResult = trResult[k];
-      var td = document.createElement('td');
-      tr.appendChild(td);
-      td.innerText = tdResult;
-    }
+      var trResult = csvArray[j];
+      var tr = document.createElement('tr');
+      table.appendChild(tr);
+      for (var k = 0; k < trResult.length; k++) {
+          var tdResult = trResult[k];
+          var td = document.createElement('td');
+          tr.appendChild(td);
+          td.innerText = tdResult;
+      }
   }
 }
-
-function onButtonClick() {
-  setData();
-  if (result !== null) {
-    resultClear();
-  }
-
-  createTable(table);
-  createCsvArray(csvArray);
-  createHeaderArray(headerArray);
-  createHeader();
-  createData();
-  logData();
-}
-
 
 window.onload = function () {
   var getData = JSON.parse(localStorage.getItem('setData'));
@@ -122,12 +122,6 @@ function log2() {
 }
 function log3() {
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[2];
-}
-
-
-function resultClear() {
-  var element = document.getElementById('result');
-  element.textContent = null;
 }
 
 function textareaClear() {
