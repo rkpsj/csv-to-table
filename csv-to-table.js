@@ -5,7 +5,7 @@ function onButtonClick() {
     return;
   }
   resultClear();
-
+  
   var table = createTable();
   var csvArray = createCsvArray(lfArray);
   var headerArray = createHeaderArray(lfArray);
@@ -134,19 +134,19 @@ function restoreHeader() {
 function restore1() {
   var getData = JSON.parse(localStorage.getItem('setData'));
   if (getData === null) {
-  } return;
+  } 
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[0];
 }
 function restore2() {
   var getData = JSON.parse(localStorage.getItem('setData'));
   if (getData === null || getData[1] === null) {
-  } return;
+  } 
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[1];
 }
 function restore3() {
   var getData = JSON.parse(localStorage.getItem('setData'));
   if (getData === null || getData[2] === null) {
-  } return;
+  } 
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[2];
 }
 
