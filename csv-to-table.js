@@ -1,6 +1,9 @@
 function onButtonClick() {
   var csvData = document.getElementById('csvtext').value;
   var lfArray = csvData.split("\n");
+  if (csvData === null || csvData === "") {
+    return;
+  }
   resultClear();
 
   var table = createTable();
@@ -15,7 +18,7 @@ function onButtonClick() {
 function resultClear() {
   var result = document.getElementById('result');
   if (result) {
-      result.textContent = null;
+    result.textContent = null;
   }
 }
 
@@ -29,19 +32,19 @@ function createTable() {
 function createHeaderArray(lfArray) {
   var chckbx = document.getElementById('checkbox');
   if (chckbx.checked) {
-      var headerArray = lfArray[0].split(",");
+    var headerArray = lfArray[0].split(",");
   } else {
-      var headerText = document.getElementById('headertext').value;
-      var headerArray = headerText.split(",");
+    var headerText = document.getElementById('headertext').value;
+    var headerArray = headerText.split(",");
   } return headerArray;
 }
 
 function createHeader(table, headerArray) {
   for (var h = 0; h < headerArray.length; h++) {
-      var thResult = headerArray[h];
-      var th = document.createElement('th');
-      table.appendChild(th);
-      th.innerText = thResult;
+    var thResult = headerArray[h];
+    var th = document.createElement('th');
+    table.appendChild(th);
+    th.innerText = thResult;
   }
 }
 
@@ -49,31 +52,31 @@ function createCsvArray(lfArray) {
   var chckbx = document.getElementById('checkbox');
   var csvArray = [];
   if (chckbx.checked) {
-      for (var i = 1; i < lfArray.length; i++) {
-          var row = lfArray[i];
-          var commaArray = row.split(",");
-          csvArray.push(commaArray);
-      }
+    for (var i = 1; i < lfArray.length; i++) {
+      var row = lfArray[i];
+      var commaArray = row.split(",");
+      csvArray.push(commaArray);
+    }
   } else {
-      for (var i = 0; i < lfArray.length; i++) {
-          var row = lfArray[i];
-          var commaArray = row.split(",");
-          csvArray.push(commaArray);
-      }
+    for (var i = 0; i < lfArray.length; i++) {
+      var row = lfArray[i];
+      var commaArray = row.split(",");
+      csvArray.push(commaArray);
+    }
   } return csvArray;
 }
 
 function createData(table, csvArray) {
   for (var j = 0; j < csvArray.length; j++) {
-      var trResult = csvArray[j];
-      var tr = document.createElement('tr');
-      table.appendChild(tr);
-      for (var k = 0; k < trResult.length; k++) {
-          var tdResult = trResult[k];
-          var td = document.createElement('td');
-          tr.appendChild(td);
-          td.innerText = tdResult;
-      }
+    var trResult = csvArray[j];
+    var tr = document.createElement('tr');
+    table.appendChild(tr);
+    for (var k = 0; k < trResult.length; k++) {
+      var tdResult = trResult[k];
+      var td = document.createElement('td');
+      tr.appendChild(td);
+      td.innerText = tdResult;
+    }
   }
 }
 
@@ -97,12 +100,12 @@ function setData() {
     var headerData = [headerText];
     localStorage.setItem('setData', JSON.stringify(headerData));
   } else if (getData[0] !== null) {
-    var getData = getData.filter(function(a) {
+    var getData = getData.filter(function (a) {
       return a !== headerText;
     });
     var headerData = getData.unshift(headerText);
     localStorage.setItem('setData', JSON.stringify(getData));
-    if (getData.length > 3 ) {
+    if (getData.length > 3) {
       var headerData = getData.pop();
       localStorage.setItem('setData', JSON.stringify(getData));
     }
@@ -111,21 +114,39 @@ function setData() {
 
 function restoreHeader() {
   var getData = JSON.parse(localStorage.getItem('setData'));
-  var restore1 = document.getElementById('restore1')
-  var restore2 = document.getElementById('restore2')
-  var restore3 = document.getElementById('restore3')
-  restore1.innerText = getData[0];
-  restore2.innerText = getData[1];
-  restore3.innerText = getData[2];
+  var restore1 = document.getElementById('restore1');
+  var restore2 = document.getElementById('restore2');
+  var restore3 = document.getElementById('restore3');
+  if (getData === null) {
+    return;
+  }
+  if (getData[0]) {
+    restore1.innerText = getData[0];
+  }
+  if (getData[1]) {
+    restore2.innerText = getData[1];
+  }
+  if (getData[2]) {
+    restore3.innerText = getData[2];
+  }
 }
 
 function restore1() {
+  var getData = JSON.parse(localStorage.getItem('setData'));
+  if (getData === null) {
+  } return;
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[0];
 }
 function restore2() {
+  var getData = JSON.parse(localStorage.getItem('setData'));
+  if (getData === null || getData[1] === null) {
+  } return;
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[1];
 }
 function restore3() {
+  var getData = JSON.parse(localStorage.getItem('setData'));
+  if (getData === null || getData[2] === null) {
+  } return;
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[2];
 }
 
