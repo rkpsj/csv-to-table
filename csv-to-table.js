@@ -8,6 +8,8 @@ function onButtonClick() {
   var headerArray = createHeaderArray(lfArray);
   createHeader(table, headerArray);
   createData(table, csvArray);
+  setData();
+  restoreHeader();
 }
 
 function resultClear() {
@@ -29,8 +31,8 @@ function createHeaderArray(lfArray) {
   if (chckbx.checked) {
       var headerArray = lfArray[0].split(",");
   } else {
-      var headerData = document.getElementById('headertext').value;
-      var headerArray = headerData.split(",");
+      var headerText = document.getElementById('headertext').value;
+      var headerArray = headerText.split(",");
   } return headerArray;
 }
 
@@ -81,7 +83,7 @@ window.onload = function () {
     return;
   }
   document.getElementById("headertext").value = getData[0];
-  logData();
+  restoreHeader();
 };
 
 
@@ -92,35 +94,38 @@ function setData() {
     return;
   }
   if (getData === null) {
-    var setData = [headerText, null];
-    localStorage.setItem('setData', JSON.stringify(setData));
-    return;
-  }
-  if (getData[0] === headerText) {
-  } else {
-    var datalist = getData.unshift(headerText);
+    var headerData = [headerText];
+    localStorage.setItem('setData', JSON.stringify(headerData));
+  } else if (getData[0] !== null) {
+    var getData = getData.filter(function(a) {
+      return a !== headerText;
+    });
+    var headerData = getData.unshift(headerText);
     localStorage.setItem('setData', JSON.stringify(getData));
-    return;
+    if (getData.length > 3 ) {
+      var headerData = getData.pop();
+      localStorage.setItem('setData', JSON.stringify(getData));
+    }
   }
 }
 
-function logData() {
+function restoreHeader() {
   var getData = JSON.parse(localStorage.getItem('setData'));
-  var log1 = document.getElementById('log1')
-  var log2 = document.getElementById('log2')
-  var log3 = document.getElementById('log3')
-  log1.innerText = getData[0];
-  log2.innerText = getData[1];
-  log3.innerText = getData[2];
+  var restore1 = document.getElementById('restore1')
+  var restore2 = document.getElementById('restore2')
+  var restore3 = document.getElementById('restore3')
+  restore1.innerText = getData[0];
+  restore2.innerText = getData[1];
+  restore3.innerText = getData[2];
 }
 
-function log1() {
+function restore1() {
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[0];
 }
-function log2() {
+function restore2() {
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[1];
 }
-function log3() {
+function restore3() {
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[2];
 }
 
