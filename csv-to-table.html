@@ -9,30 +9,23 @@
 <h1>CSVデータのテーブル表示</h1>
 <div>
     <form name="csvform" id="csvform" action="">
+    <span>CSVデータ入力欄</span>
+    <input type="checkbox" id="checkbox" name="header">CSVデータの1行目をヘッダーにする</input><br>
     <textarea name="csvtext" id="csvtext" style="width: 90%; height: 100px;"></textarea><br>
     <input type="text" name="dummy" style="display:none;">
-    <label>header（カンマ区切り） </label><input type="text" id="headertext" style="width: 90%; height: 30px;">
+    <span>ヘッダーを手動で入力する（カンマ区切り　ヘッダーは3つまで保存できます）</span><br>
+    <input type="text" id="headertext" style="width: 90%; height: 30px;">
     <input type="button" class="btn btn-info" value="表示" onclick="onButtonClick();" />
     </form>
 </div>
-<div>
-    <form name="checkbox">
-    <input type="checkbox" id="checkbox" name="header">データの1行目をヘッダーにする</input>
-    </form>
-</div>
 <hr>
-<div id="restore1" style="margin: 5px;"></div>
+<div id="restore1" style="margin: 5px;">ここに手動で入力したヘッダーが保存されます</div>
 <div id="restore2" style="margin: 5px;"></div>
 <div id="restore3" style="margin: 5px;"></div>
-<div style="margin-top: 10px;">
-    <input type="button" class="btn-success" value="header1を復元" onclick="restore1();" />
-    <input type="button" class="btn-success" value="header2を復元" onclick="restore2();" />
-    <input type="button" class="btn-success" value="header3を復元" onclick="restore3();" />
-</div>
-<hr>   
+<hr>
 <div>
     <input type="button" class="btn-danger" value="テキストエリアのクリア" onclick="textareaClear();" />
-    <input type="button" class="btn-danger" value="表示結果のクリア" onclick="resultClear();" /> 
+    <input type="button" class="btn-danger" value="表示結果のクリア" onclick="resultClear();" />
 </div>
 
 <div id="result" style="margin-top: 20px; font-size: 70%;"></div>

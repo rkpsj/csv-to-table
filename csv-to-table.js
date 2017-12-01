@@ -5,7 +5,7 @@ function onButtonClick() {
     return;
   }
   resultClear();
-  
+
   var tbody = createTable();
   var csvArray = createCsvArray(lfArray);
   var headerArray = createHeaderArray(lfArray);
@@ -24,7 +24,7 @@ function resultClear() {
 
 function createTable() {
   var table = document.createElement('table');
-  table.setAttribute('class','table table-striped');
+  table.setAttribute('class', 'table table-striped table-bordered');
   var tbody = document.createElement('tbody');
   var result = document.getElementById('result');
   result.appendChild(table);
@@ -126,32 +126,32 @@ function restoreHeader() {
     return;
   }
   if (getData[0]) {
-    restore1.innerText = getData[0];
+    restore1.innerHTML = "<input type='button' class='btn-success' value='ヘッダー1を復元' onclick='restore1();' /> " + getData[0];
   }
   if (getData[1]) {
-    restore2.innerText = getData[1];
+    restore2.innerHTML = "<input type='button' class='btn-success' value='ヘッダー2を復元' onclick='restore2();' /> " + getData[1];
   }
   if (getData[2]) {
-    restore3.innerText = getData[2];
+    restore3.innerHTML = "<input type='button' class='btn-success' value='ヘッダー3を復元' onclick='restore3();' /> " + getData[2];
   }
 }
 
 function restore1() {
   var getData = JSON.parse(localStorage.getItem('setData'));
   if (getData === null) {
-  } 
+  }
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[0];
 }
 function restore2() {
   var getData = JSON.parse(localStorage.getItem('setData'));
   if (getData === null || getData[1] === null) {
-  } 
+  }
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[1];
 }
 function restore3() {
   var getData = JSON.parse(localStorage.getItem('setData'));
   if (getData === null || getData[2] === null) {
-  } 
+  }
   document.getElementById("headertext").value = JSON.parse(localStorage.getItem('setData'))[2];
 }
 
