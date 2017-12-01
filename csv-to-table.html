@@ -1,42 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
+        crossorigin="anonymous">
 </head>
+
 <body class="jumbotron" style="background-color: #ffffff">
-<h1>CSVデータのテーブル表示</h1>
-<div>
-    <form name="csvform" id="csvform" action="">
-    <span>CSVデータ入力欄</span>
-    <input type="checkbox" id="checkbox" name="header">CSVデータの1行目をヘッダーにする</input><br>
-    <textarea name="csvtext" id="csvtext" style="width: 90%; height: 100px;"></textarea><br>
-    <input type="text" name="dummy" style="display:none;">
-    <span>ヘッダーを手動で入力する（カンマ区切り　ヘッダーは3つまで保存できます）</span><br>
-    <input type="text" id="headertext" style="width: 90%; height: 30px;">
-    <input type="button" class="btn btn-info" value="表示" onclick="onButtonClick();" />
-    </form>
-</div>
-<hr>
-<div id="restore1" style="margin: 5px;">ここに手動で入力したヘッダーが保存されます</div>
-<div id="restore2" style="margin: 5px;"></div>
-<div id="restore3" style="margin: 5px;"></div>
-<hr>
-<div>
-    <input type="button" class="btn-danger" value="テキストエリアのクリア" onclick="textareaClear();" />
-    <input type="button" class="btn-danger" value="表示結果のクリア" onclick="resultClear();" />
-</div>
+    <h1>CSVデータのテーブル表示</h1>
+    <div>
+        <form name="csvform" id="csvform" action="">
+            <span>CSVデータ入力欄</span>
+            <input type="checkbox" id="checkbox" name="header">CSVデータの1行目をヘッダーにする</input>
+            <br>
+            <textarea name="csvtext" id="csvtext" style="width: 90%; height: 100px;"></textarea>
+            <br>
+            <input type="text" name="dummy" style="display:none;">
+            <span>ヘッダーを手動で入力する（カンマ区切り　ヘッダーは3つまで保存できます）</span>
+            <br>
+            <input type="text" id="headertext" style="width: 90%; height: 30px;">
+            <input type="button" class="btn btn-info" value="表示" onclick="onButtonClick();" />
+        </form>
+    </div>
+    <hr>
+    <div id="restore1" style="margin: 5px;">ここに手動で入力したヘッダーが保存されます</div>
+    <div id="restore2" style="margin: 5px;"></div>
+    <div id="restore3" style="margin: 5px;"></div>
+    <hr>
+    <div>
+        <input type="button" class="btn-danger" value="テキストエリアのクリア" onclick="textareaClear();" />
+        <input type="button" class="btn-danger" value="表示結果のクリア" onclick="resultClear();" />
+    </div>
 
-<div id="result" style="margin-top: 20px; font-size: 70%;"></div>
+    <div id="result" style="margin-top: 20px; font-size: 70%;"></div>
 
 
-<div style="margin-top: 50px;">
-    ※headerのカラム名は編集可能なようにしておく。<br>
-    ※headerのカラム名は、localStrageに履歴を保持してほしい。可能であれば選択して復元してほしい。<br>
-    ※tableはborderや色分けで見やすくする。<br>
-    ※今後グラフ表示の機能を追加してもらう可能性がある。
-</div>
-<script src="csv-to-table.js"></script>
+    <div style="margin-top: 50px;">
+        ※headerのカラム名は編集可能なようにしておく。
+        <br> ※headerのカラム名は、localStrageに履歴を保持してほしい。可能であれば選択して復元してほしい。
+        <br> ※tableはborderや色分けで見やすくする。
+        <br> ※今後グラフ表示の機能を追加してもらう可能性がある。
+    </div>
+    <script src="csv-to-table.js"></script>
 </body>
+
 </html>
