@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 </head>
-<body>
+<body class="jumbotron" style="background-color: #ffffff">
 <h1>CSVデータのテーブル表示</h1>
 <div>
     <form name="csvform" id="csvform" action="">
     <textarea name="csvtext" id="csvtext" style="width: 90%; height: 100px;"></textarea><br>
     <input type="text" name="dummy" style="display:none;">
     <label>header（カンマ区切り） </label><input type="text" id="headertext" style="width: 90%; height: 30px;">
-    <input type="button" value="表示" onclick="onButtonClick();" />
+    <input type="button" class="btn btn-info" value="表示" onclick="onButtonClick();" />
     </form>
 </div>
 <div>
@@ -19,18 +20,22 @@
     <input type="checkbox" id="checkbox" name="header">データの1行目をヘッダーにする</input>
     </form>
 </div>
-<div>
-    <input type="button" value="テキストエリアのクリア" onclick="textareaClear();" />
-    <input type="button" value="表示結果のクリア" onclick="resultClear();" /> 
+<hr>
+<div id="restore1" style="margin: 5px;"></div>
+<div id="restore2" style="margin: 5px;"></div>
+<div id="restore3" style="margin: 5px;"></div>
+<div style="margin-top: 10px;">
+    <input type="button" class="btn-success" value="header1を復元" onclick="restore1();" />
+    <input type="button" class="btn-success" value="header2を復元" onclick="restore2();" />
+    <input type="button" class="btn-success" value="header3を復元" onclick="restore3();" />
 </div>
-<div id="restore1"></div>
-<form action=""><input type="button" value="復元" onclick="restore1();" /></form>
-<div id="restore2"></div>
-<form action=""><input type="button" value="復元" onclick="restore2();" /></form>
-<div id="restore3"></div>
-<form action=""><input type="button" value="復元" onclick="restore3();" /></form>
+<hr>   
+<div>
+    <input type="button" class="btn-danger" value="テキストエリアのクリア" onclick="textareaClear();" />
+    <input type="button" class="btn-danger" value="表示結果のクリア" onclick="resultClear();" /> 
+</div>
 
-<div id="result" style="margin-top: 50px;"></div>
+<div id="result" style="margin-top: 20px; font-size: 70%;"></div>
 
 
 <div style="margin-top: 50px;">

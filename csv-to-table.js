@@ -6,11 +6,11 @@ function onButtonClick() {
   }
   resultClear();
   
-  var table = createTable();
+  var tbody = createTable();
   var csvArray = createCsvArray(lfArray);
   var headerArray = createHeaderArray(lfArray);
-  createHeader(table, headerArray);
-  createData(table, csvArray);
+  createHeader(tbody, headerArray);
+  createData(tbody, csvArray);
   setData();
   restoreHeader();
 }
@@ -24,9 +24,12 @@ function resultClear() {
 
 function createTable() {
   var table = document.createElement('table');
+  table.setAttribute('class','table table-striped');
+  var tbody = document.createElement('tbody');
   var result = document.getElementById('result');
   result.appendChild(table);
-  return table;
+  table.appendChild(tbody);
+  return tbody;
 }
 
 function createHeaderArray(lfArray) {
@@ -39,11 +42,13 @@ function createHeaderArray(lfArray) {
   } return headerArray;
 }
 
-function createHeader(table, headerArray) {
+function createHeader(tbody, headerArray) {
+  var tr = document.createElement('tr');
+  tbody.appendChild(tr);
   for (var h = 0; h < headerArray.length; h++) {
     var thResult = headerArray[h];
     var th = document.createElement('th');
-    table.appendChild(th);
+    tr.appendChild(th);
     th.innerText = thResult;
   }
 }
@@ -66,11 +71,11 @@ function createCsvArray(lfArray) {
   } return csvArray;
 }
 
-function createData(table, csvArray) {
+function createData(tbody, csvArray) {
   for (var j = 0; j < csvArray.length; j++) {
     var trResult = csvArray[j];
     var tr = document.createElement('tr');
-    table.appendChild(tr);
+    tbody.appendChild(tr);
     for (var k = 0; k < trResult.length; k++) {
       var tdResult = trResult[k];
       var td = document.createElement('td');
