@@ -34,5 +34,13 @@ $(function () {
         csvArray.push(lfArray[i].split(','));
       }
     }
+    for (var j = 0; j < csvArray.length; j++) {
+      var trResult = csvArray[j];
+      var tr = $('<tr>').appendTo('#tbody');
+      for (var k = 0; k < trResult.length; k++) {
+        var tdResult = trResult[k];
+        $('<td>' + tdResult + '</td>').appendTo(tr);
+      }
+    }
   });
 });
