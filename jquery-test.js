@@ -2,66 +2,93 @@ $(function () {
     $('#textClear').click(function () {
         $('#csvtext').val(null);
     });
-    $('#resultClear').click(function () {
+    var resultClear = function () {
         $('#result').empty();
-    });
-    $('#resultButton').click(function () {
-        var lfArray = $('#csvtext').val().split('\n');
-        if ($('#csvtext').val() === null || $('#csvtext').val() === '') {
-            return;
-        }
-        $('#result').empty();
-        $('<table id="table" class="table table-striped table-bordered">').appendTo($('#result'));
-        $('<thead id="thead">').appendTo('#table');
-        $('<tbody id="tbody">').appendTo('#table');
-        if ($('#checkbox').prop('checked')) {
-            var hdArray = lfArray[0].split(',');
+    };
+    $('#resultClear').click(resultClear);
+    var createTable = function () {
+        $('<table id="table" class="table table-striped table-bordered"></table>').appendTo('#result');
+        $('<thead id="thead"></thead>').appendTo('#table');
+        $('<tbody id="tbody"></tbody>').appendTo('#table');
+    };
+    var createHeader = function (lfArray) {
+        var $checkbox = $('#checkbox');
+        var hdArray;
+        var $headertext = $('#headertext');
+        if ($checkbox.prop('checked')) {
+            hdArray = lfArray[0].split(',');
         } else {
-            var hdArray = $('#headertext').val().split(',');
+            hdArray = $headertext.val().split(',');
         }
-        $('<tr id="tr">').appendTo('#thead');
+        $('<tr id="tr"></tr>').appendTo('#thead');
         for (var h = 0; h < hdArray.length; h++) {
             var thResult = hdArray[h];
-            $('<th>').appendTo('#tr').text(thResult);
+            $('<th></th>').appendTo('#tr').text(thResult);
         }
+    };
+    var createCsvArray = function (lfArray) {
+        var $checkbox = $('#checkbox');
         var csvArray = [];
-        if ($('#checkbox').prop('checked')) {
-            for (var i = 1; i < lfArray.length; i++) {
+        var i;
+        if ($checkbox.prop('checked')) {
+            for (i = 1; i < lfArray.length; i++) {
                 csvArray.push(lfArray[i].split(','));
             }
         } else {
-            for (var i = 0; i < lfArray.length; i++) {
+            for (i = 0; i < lfArray.length; i++) {
                 csvArray.push(lfArray[i].split(','));
             }
         }
+        return csvArray;
+    };
+    var createData = function (csvArray) {
         for (var j = 0; j < csvArray.length; j++) {
             var trResult = csvArray[j];
-            var tr = $('<tr>').appendTo('#tbody');
+            var tr = $('<tr></tr>').appendTo('#tbody');
             for (var k = 0; k < trResult.length; k++) {
                 var tdResult = trResult[k];
                 $('<td>' + tdResult + '</td>').appendTo(tr);
             }
         }
+    };
+    var setData = function () {
+        var $headertext = $('#headertext');
         var getData = JSON.parse(localStorage.getItem('setData'));
-        if ($('#headertext').val() === null || $('#headertext').val() === '') {
+        var headerData;
+        if ($headertext.val() === null || $headertext.val() === '') {
             return;
         }
         if (getData === null) {
-            var headerData = [$('#headertext').val()];
+            headerData = [$headertext.val()];
             localStorage.setItem('setData', JSON.stringify(headerData));
         } else if (getData[0] !== null) {
-            var getData = getData.filter(function (a) {
-                return a !== $('#headertext').val();
+            getData = getData.filter(function (a) {
+                return a !== $headertext.val();
             });
-            var headerData = getData.unshift($('#headertext').val());
+            headerData = getData.unshift($headertext.val());
             localStorage.setItem('setData', JSON.stringify(getData));
             if (getData.length > 3) {
-                var headerData = getData.pop();
+                headerData = getData.pop();
                 localStorage.setItem('setData', JSON.stringify(getData));
             }
         }
+    };
+    var resultTable = function () {
+        var $csvtext = $('#csvtext');
+        if ($csvtext.val() === null || $csvtext.val() === '') {
+            return;
+        }
+        var lfArray = $csvtext.val().split('\n');
+        var csvArray = createCsvArray(lfArray);
+        resultClear();
+        createTable();
+        createHeader(lfArray);
+        createCsvArray(lfArray);
+        createData(csvArray);
+        setData();
         restoreHeader();
-    });
+    };
+    $('#resultButton').click(resultTable);
     $('#restore1').click(function () {
         var getData = JSON.parse(localStorage.getItem('setData'));
         if (getData === null) {
