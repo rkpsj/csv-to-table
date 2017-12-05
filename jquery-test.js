@@ -81,6 +81,11 @@ $(function () {
     $('#headertext').val(JSON.parse(localStorage.getItem('setData'))[2]);
   });
   restoreHeader();
+    var getData = JSON.parse(localStorage.getItem('setData'));
+    if (getData === null) {
+        return;
+    }
+    $('#headertext').val(getData[0]);
 });
 
 function restoreHeader() {
