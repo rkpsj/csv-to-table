@@ -9,7 +9,6 @@ $(function () {
     var createTable = function () {
         $('<table id="table" class="table table-striped table-bordered"></table>').appendTo('#result');
         $('<thead id="thead"></thead>').appendTo('#table');
-        $('<tbody id="tbody"></tbody>').appendTo('#table');
     };
     var createHeader = function (lfArray) {
         var $checkbox = $('#checkbox');
@@ -42,14 +41,19 @@ $(function () {
         return csvArray;
     };
     var createData = function (csvArray) {
+        var html = [];
+        var $tbody = $('<tbody id="tbody"></tbody>');
         for (var j = 0; j < csvArray.length; j++) {
             var trResult = csvArray[j];
-            var tr = $('<tr></tr>').appendTo('#tbody');
+            html.push('<tr>');
             for (var k = 0; k < trResult.length; k++) {
                 var tdResult = trResult[k];
-                $('<td>' + tdResult + '</td>').appendTo(tr);
+                html.push('<td>' + tdResult + '</td>');
             }
+            html.push('</tr>');
         }
+        $tbody.append(html.join(''));
+        $tbody.appendTo('#table');
     };
     var setData = function () {
         var $headertext = $('#headertext');
